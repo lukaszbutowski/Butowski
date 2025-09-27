@@ -47,8 +47,9 @@
 
     /* Mobile nav drawer */
     .nav { display:flex; align-items:center; }
-    .nav-mobile { display:none; position: fixed; inset: 56px 0 0 0; background:#000; border-top:1px solid #1f1f1f; padding: 14px 20px; }
-    .nav-mobile a { display:block; padding:12px 8px; margin:0; border-radius:8px; }
+    .nav-mobile { display:none; position: fixed; inset: 56px 0 0 0; background:#000; border-top:1px solid #1f1f1f; padding: 14px 20px; z-index: 9; }
+    .nav-mobile.open { display:block; }
+    .nav-mobile a { display:block; padding:12px 8px; margin:0; border-radius:8px; color: var(--text); text-decoration: none; }
     .nav-mobile a:hover { background:#111; }
 
     /* Gallery */
@@ -105,7 +106,7 @@
         <span class="ham-lines"></span>
       </button>
     </div>
-    <div class="nav-mobile" id="mobileNav" hidden>
+    <div class="nav-mobile" id="mobileNav">
       <a href="#galeria">Galeria</a>
       <a href="#kontakt">Kontakt</a>
     </div>
@@ -153,7 +154,7 @@
 
   <script>
     // ===== Dane =====
-    const images = [
+      const images = [
       { src: "obrazy/obraz1.jpg", caption: "Soldat Inconnu", alt: "Litografia 100x70 cm • 2016" },
       { src: "obrazy/obraz2.jpg", caption: "Sztafeta pokoleń 1", alt: "Litografia 170x130 cm • 2016" },
       { src: "obrazy/obraz3.jpg", caption: "Sztafeta Pokoleń 2", alt: "Litografia 140x100 cm • 2016" },
@@ -163,6 +164,7 @@
       { src: "obrazy/obraz5.jpg", caption: "Locomotor Ataxia", alt: "litografia 112 x 78 cm 2018" },
       { src: "obrazy/obraz6.jpg", caption: "Tak Sobie Chlapię", alt: "litografia 100 x 70 cm 2018" },
       { src: "obrazy/obraz7.jpg", caption: "Siedzimy w Okopach 1", alt: "Serigrafia 70 x 50 cm 2020" },
+      { src: "", caption: "Do uzupełnienia", alt: "Miejsce na pracę" },
       { src: "", caption: "Do uzupełnienia", alt: "Miejsce na pracę" },
       { src: "", caption: "Do uzupełnienia", alt: "Miejsce na pracę" },
       { src: "", caption: "Do uzupełnienia", alt: "Miejsce na pracę" },
@@ -275,15 +277,21 @@
       if (e.key === 'Escape') closeLightbox();
     });
 
-    hamBtn.addEventListener('click', () => {
-      const expanded = hamBtn.getAttribute('aria-expanded') === 'true';
-      hamBtn.setAttribute('aria-expanded', String(!expanded));
-      mobileNav.hidden = expanded;
+    hamBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = mobileNav.classList.toggle('open');
+      hamBtn.setAttribute('aria-expanded', String(isOpen));
     });
     mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
       hamBtn.setAttribute('aria-expanded', 'false');
-      mobileNav.hidden = true;
     }));
+    document.addEventListener('click', (e) => {
+      if (!mobileNav.contains(e.target) && e.target !== hamBtn) {
+        mobileNav.classList.remove('open');
+        hamBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
 
     buildGallery();
   </script>
