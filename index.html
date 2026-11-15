@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Łukasz Butowski</title>
+  <meta name="description" content="Łukasz Butowski: grafika warsztatowa, litografia, serigrafia i malarstwo.">
+  <meta property="og:title" content="Łukasz Butowski">
+  <meta property="og:description" content="Grafika warsztatowa, litografia, serigrafia i malarstwo.">
+  <meta property="og:type" content="website">
+  <link rel="preload" href="fonty/jost-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonty/jost-latin-ext-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Cpath d='M11 6v20h11M7 18l8-5' fill='none' stroke='%2355534e' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="widok-start">
+  <a class="pomin" href="#tresc" id="pomin">Przejdź do treści</a>
+
+  <header class="naglowek" id="naglowek">
+    <a class="logo" href="#start" id="logo">Łukasz Butowski</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="menu" id="menu" aria-label="Nawigacja główna">
+      <a href="#prace" data-cel="prace">Prace</a>
+      <a href="#wystawy" data-cel="wystawy" hidden>Wystawy</a>
+      <a href="#bio" data-cel="bio">Bio</a>
+      <a href="#kontakt" data-cel="kontakt">Kontakt</a>
+      <span class="jezyk" id="jezyk" role="group" aria-label="Język strony">
+        <button type="button" data-jezyk="pl" lang="pl">PL</button>
+        <span aria-hidden="true">/</span>
+        <button type="button" data-jezyk="en" lang="en">EN</button>
+      </span>
+    </nav>
+  </header>
+
+  <main id="tresc" tabindex="-1">
+    <section class="widok pokaz" id="widok-start" aria-label="Wybrane prace">
+      <div class="pokaz-scena" id="pokaz-scena"></div>
+      <div class="pokaz-dol">
+        <p class="pokaz-podpis">
+          <a class="etykieta" id="pokaz-etykieta" href="#prace"></a>
+          <span class="pokaz-tytul" id="pokaz-tytul"></span>
+        </p>
+        <div class="pokaz-sterowanie">
+          <span class="licznik" id="pokaz-licznik"></span>
+          <button class="ikona" id="pokaz-pauza" type="button"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="widok uklad" id="widok-prace" hidden></section>
+    <section class="widok uklad" id="widok-wystawy" hidden></section>
+    <section class="widok uklad" id="widok-bio" hidden></section>
+    <section class="widok uklad" id="widok-kontakt" hidden></section>
+
+    <noscript><p class="uklad">Ta strona potrzebuje włączonej obsługi JavaScript. This site needs JavaScript.</p></noscript>
+  </main>
+
+  <footer class="stopka" id="stopka"></footer>
+
+  <div class="podglad" id="podglad" role="dialog" aria-modal="true" aria-labelledby="podglad-tytul" hidden>
+    <div class="podglad-gora">
+      <span class="licznik" id="podglad-licznik"></span>
+      <button class="ikona zamknij" id="podglad-zamknij" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+    </div>
+    <div class="podglad-scena" id="podglad-scena">
+      <button class="ikona strzalka wstecz" id="podglad-wstecz" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg>
+      </button>
+      <figure class="podglad-praca">
+        <img id="podglad-obraz" alt="">
+        <figcaption class="adnotacja">
+          <span class="adnotacja-wiersz">
+            <span class="adn-technika" id="podglad-technika"></span>
+            <span class="adn-tytul" id="podglad-tytul"></span>
+            <span class="adn-rok" id="podglad-rok"></span>
+          </span>
+        </figcaption>
+      </figure>
+      <button class="ikona strzalka dalej" id="podglad-dalej" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <script src="dane.js"></script>
+  <script src="strona.js"></script>
+</body>
+</html>
