@@ -92,3 +92,9 @@ otworzyć `index.html` u siebie na dysku: jeśli strona jest pusta, w `dane.js` 
 
 - `#prace`, `#bio`, `#kontakt`
 - pojedyncza praca: `#praca-` + `id`, np. `…/#praca-locomotor-ataxia` (dobre do wysyłania komuś konkretnej grafiki)
+
+## Odświeżanie po zmianach
+
+Przeglądarki trzymają `dane.js`, `strona.js` i `style.css` w pamięci do 10 minut. W `index.html` te pliki mają
+dopisek `?v=20261116`. Po zmianie któregoś z nich podmień ten numer (np. na dzisiejszą datę), a odwiedzający
+od razu dostaną nową wersję.
