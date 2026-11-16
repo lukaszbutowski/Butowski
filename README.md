@@ -33,7 +33,10 @@ Działa na GitHub Pages, na każdym zwykłym hostingu i po dwukrotnym kliknięci
 - `szer` i `wys` to wymiary **pliku** w pikselach (widać je w Photoshopie albo we właściwościach pliku w Windows).
 - `technika` piszesz normalnie po polsku. Angielska wersja tworzy się sama ze słownika `TECHNIKI_EN`;
   nowy termin (np. „akwaforta”) dopisz tam razem z tłumaczeniem.
-- `dzial`: `"grafika"` albo `"malarstwo"`; na stronie są przyciski do filtrowania.
+- `dzial`: `"grafika"`, `"malarstwo"`, `"rysunek"` albo `"szkice"`; na stronie są przyciski do filtrowania.
+  Szkice mają w `DZIALY` ustawione `osobno: true`: widać je tylko pod przyciskiem „Szkice”, nie w „Wszystkie”
+  ani w pokazie na stronie głównej. Każdy dział ma też własny adres, np. `#prace-szkice`, `#prace-rysunek`.
+- `wymiaryEn`: wymiary po angielsku, tylko gdy jest w nich tekst (np. „szer. 150 cm” → „width 150 cm”).
 - `glowna: true` sprawia, że praca pojawi się w pokazie na stronie głównej.
 - Gdy praca powstawała kilka lat, dodaj `daty: "2020–2024"`, a w `rok` wpisz rok zakończenia.
 - Dopisek pod opisem (np. kolekcja): `uwaga: "kolekcja Muzeum Gdańska", uwagaEn: "Museum of Gdańsk collection"`.

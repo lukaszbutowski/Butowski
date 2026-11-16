@@ -139,8 +139,11 @@
     });
   }
 
-  function listaPrac() {
-    var lista = D.prace.filter(function (p) { return filtr === "wszystkie" || p.dzial === filtr; });
+  function osobny(dzial) { return !!(D.DZIALY && D.DZIALY[dzial] && D.DZIALY[dzial].osobno); }
+
+  function listaPrac(f) {
+    f = f || filtr;
+    var lista = D.prace.filter(function (p) { return f === "wszystkie" ? !osobny(p.dzial) : p.dzial === f; });
     return poRoku(lista, function (p) { return p.rok; }).map(elementPracy);
   }
 
@@ -153,7 +156,9 @@
   }
 
   function znajdzElement(k) {
-    var listy = [listaPrac(), D.prace.map(elementPracy), listaZdjec()];
+    var listy = [listaPrac()];
+    if (D.DZIALY) Object.keys(D.DZIALY).forEach(function (d) { listy.push(listaPrac(d)); });
+    listy.push(D.prace.map(elementPracy), listaZdjec());
     for (var l = 0; l < listy.length; l++) {
       for (var i = 0; i < listy[l].length; i++) {
         if (listy[l][i].klucz === k) return { el: listy[l][i], lista: listy[l] };
@@ -186,7 +191,8 @@
       link,
       zPodpisem ? el("figcaption", null, [
         el("span", { class: "praca-tytul", text: item.tytul }),
-        item.opis ? el("span", { class: "praca-opis", text: item.opis }) : null,
+        // w działach oddzielnych (szkice) opis tylko w powiększeniu, żeby nie powtarzać go pod każdym kafelkiem
+        item.opis && !(item.zrodlo && osobny(item.zrodlo.dzial)) ? el("span", { class: "praca-opis", text: item.opis }) : null,
         item.uwaga ? el("span", { class: "praca-opis praca-uwaga", text: item.uwaga }) : null
       ]) : null
     ]);
@@ -273,12 +279,10 @@
     });
     var zdj = item.typ === "zdjecie";
     var et = $("pokaz-etykieta");
-    et.innerHTML = "";
-    et.appendChild(document.createTextNode(t(zdj ? "wystawy" : "prace")));
-    if (item.rok) { et.appendChild(document.createTextNode(" / ")); et.appendChild(el("b", { text: String(item.rok) })); }
+    et.textContent = item.tytul || "";
     et.setAttribute("href", zdj ? "#wystawy" : "#prace");
     et.setAttribute("data-sekcja", zdj ? "ws-" + item.wystawa.id : "rok-" + klucz(item.rok));
-    $("pokaz-tytul").textContent = zdj ? [item.tytul, item.lewy].filter(Boolean).join(", ") : item.tytul;
+    $("pokaz-opis").textContent = [item.lewy, item.prawy].filter(Boolean).join(", ");
     $("pokaz-licznik").textContent = (pokazIndeks + 1) + " / " + n;
     $("pokaz-licznik").hidden = n < 2;
     $("pokaz-pauza").hidden = n < 2;
@@ -325,12 +329,19 @@
     var pasek = el("div", { class: "pasek" });
     var dzialyObecne = [];
     D.prace.forEach(function (p) { if (p.dzial && dzialyObecne.indexOf(p.dzial) < 0) dzialyObecne.push(p.dzial); });
+    if (D.DZIALY) {  // kolejność przycisków jak w DZIALY
+      var kolej = Object.keys(D.DZIALY);
+      dzialyObecne.sort(function (a, b) { return (kolej.indexOf(a) + 1 || 99) - (kolej.indexOf(b) + 1 || 99); });
+    }
     if (dzialyObecne.length > 1) {
       var grupa = el("div", { class: "pasek pasek-wew", role: "group", "aria-label": t("dzialy") });
       ["wszystkie"].concat(dzialyObecne).forEach(function (d) {
         var nazwa = d === "wszystkie" ? t("wszystkie") : ((D.DZIALY && D.DZIALY[d]) ? D.DZIALY[d][jezyk] : d);
         var b = el("button", { type: "button", text: nazwa, "aria-pressed": String(filtr === d) });
-        b.addEventListener("click", function () { filtr = d; zbudujPrace(); });
+        b.addEventListener("click", function () {
+          filtr = d; zbudujPrace();
+          try { history.replaceState(null, "", d === "wszystkie" ? "#prace" : "#prace-" + d); } catch (e) { /* bez zmiany adresu */ }
+        });
         grupa.appendChild(b);
       });
       pasek.appendChild(grupa);
@@ -490,7 +501,7 @@
       podgladZKlikniecia = false;
       history.back();
     } else {
-      location.replace("#" + (biezacyWidok || "prace"));
+      location.replace("#" + (biezacyWidok === "prace" && filtr !== "wszystkie" ? "prace-" + filtr : (biezacyWidok || "prace")));
     }
   }
 
@@ -579,6 +590,10 @@
 
     if (h.indexOf("praca-") === 0 || h.indexOf("wystawa-") === 0) {
       var z = znajdzElement(h);
+      if (z && z.el.typ === "praca" && z.el.zrodlo && filtr !== z.el.zrodlo.dzial && osobny(z.el.zrodlo.dzial)) {
+        filtr = z.el.zrodlo.dzial; zbudujPrace();
+        z = znajdzElement(h);
+      }
       if (z) {
         var tlo = z.el.typ === "zdjecie" ? "wystawy" : "prace";
         pokazWidok(biezacyWidok || tlo);
@@ -591,6 +606,13 @@
     }
     podgladZKlikniecia = false;
     zamknijPodglad();
+    if (h.indexOf("prace-") === 0) {
+      var dz = h.slice(6);
+      if (D.DZIALY && D.DZIALY[dz] && filtr !== dz) { filtr = dz; zbudujPrace(); }
+      h = "prace";
+    } else if (h === "prace" && filtr !== "wszystkie" && location.hash === "#prace") {
+      filtr = "wszystkie"; zbudujPrace();
+    }
     if (h === "wystawy" && !D.wystawy.length) h = "prace";
     var w = WIDOKI.indexOf(h) > 0 ? h : "start";
     pokazWidok(w);
