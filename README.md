@@ -77,7 +77,9 @@ w miejscu pracy pojawi się komunikat z nazwą pliku, którego brakuje.
    zastępując stary `index.html`. Stary folder z obrazami `obraz1.jpg`… można usunąć.
 2. Na GitHubie: **Settings → Pages → Build and deployment → Source: Deploy from a branch**,
    wybierz `main` i `/ (root)`, kliknij **Save**.
-3. Po minucie lub dwóch strona będzie pod adresem `https://lukaszbutowski.github.io/Butowski/`.
+3. Po minucie lub dwóch strona będzie pod adresem `https://lbutowski.com` (stary adres `https://lukaszbutowski.github.io/Butowski/` sam na nią przekierowuje).
+
+**Nie usuwaj pliku `CNAME`** z repozytorium – to w nim zapisana jest domena lbutowski.com. Bez niego strona wróci pod stary adres.
 
 **Ograniczenia wgrywania przez przeglądarkę:** GitHub przyjmuje w ten sposób najwyżej 100 plików naraz
 i pliki do 25 MB. Strona ma ok. 280 plików, więc za pierwszym razem wygodniej użyć darmowej aplikacji
