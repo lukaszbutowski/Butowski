@@ -84,10 +84,10 @@ main:focus { outline: none; }
   padding: 0 var(--margines);
   background: var(--papier);
 }
-/* Nazwisko jak podpis pod odbitką: szeryfowe, zwykłe litery */
+/* Nazwisko: groteska zwykłymi literami, bez rozstrzelenia */
 .logo {
-  font: 400 clamp(1.3rem, 2.2vw, 1.9rem)/1 var(--szeryf);
-  letter-spacing: .01em;
+  font: 450 clamp(1.25rem, 2.1vw, 1.8rem)/1 var(--groteska);
+  letter-spacing: -.005em;
   text-decoration: none;
   color: var(--tusz); white-space: nowrap;
 }
