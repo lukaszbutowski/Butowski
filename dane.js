@@ -347,6 +347,11 @@ window.STRONA = {
     { id: "osoby", plik: "obrazy/prace/osoby.jpg", mini: "obrazy/prace/m/osoby.jpg", szer: 1430, wys: 2000, tytul: "Osoby", technika: "litografia, czarny karton", wymiary: "70 × 50 cm (każda)", wymiaryEn: "70 × 50 cm (each)", rok: 2025, daty: "2018–2025", uwaga: "zestaw 9 prac", uwagaEn: "set of 9 works", dzial: "grafika", glowna: false },
     // Dane z katalogu „Sztuka Katastrofy” (na planszy habilitacyjnej podpis był skopiowany z „Siedzimy w okopach 2”)
     { id: "sine-qua-non", plik: "obrazy/prace/sine-qua-non.jpg", mini: "obrazy/prace/m/sine-qua-non.jpg", szer: 1532, wys: 2000, tytul: "Sine Qua Non", technika: "litografia", wymiary: "76 × 56 cm", rok: 2020, dzial: "grafika", glowna: false },
+    { id: "exlibris-7", plik: "obrazy/prace/exlibris-7.jpg", mini: "obrazy/prace/m/exlibris-7.jpg", szer: 1772, wys: 1672, tytul: "Exlibris 7", technika: "litografia", wymiary: "14 × 15 cm", rok: 2015, dzial: "grafika", glowna: false },
+    { id: "exlibris-8", plik: "obrazy/prace/exlibris-8.jpg", mini: "obrazy/prace/m/exlibris-8.jpg", szer: 1500, wys: 1428, tytul: "Exlibris 8", technika: "litografia", wymiary: "14 × 13 cm", rok: 2015, dzial: "grafika", glowna: false },
+    { id: "exlibris-9", plik: "obrazy/prace/exlibris-9.jpg", mini: "obrazy/prace/m/exlibris-9.jpg", szer: 1556, wys: 1412, tytul: "Exlibris 9", technika: "litografia", wymiary: "14 × 13 cm", rok: 2015, dzial: "grafika", glowna: false },
+    { id: "exlibris-jezdziec", plik: "obrazy/prace/exlibris-jezdziec.jpg", mini: "obrazy/prace/m/exlibris-jezdziec.jpg", szer: 1645, wys: 1550, tytul: "Exlibris (jeździec)", technika: "litografia", wymiary: "", rok: 2015, dzial: "grafika", glowna: false },
+    { id: "exlibris-geralt", plik: "obrazy/prace/exlibris-geralt.jpg", mini: "obrazy/prace/m/exlibris-geralt.jpg", szer: 1398, wys: 1455, tytul: "Exlibris Geralta z Rivii", technika: "litografia", wymiary: "", rok: 2016, dzial: "grafika", glowna: false },
 
     // ---------- MALARSTWO ----------
     { id: "gdanska-sztuka-nieba-2", plik: "obrazy/prace/gdanska-sztuka-nieba-2.jpg", mini: "obrazy/prace/m/gdanska-sztuka-nieba-2.jpg", szer: 985, wys: 2000, tytul: "Gdańska Sztuka Nieba 2", technika: "akryl i olej na płótnie", wymiary: "190 × 90 cm", rok: 2025, dzial: "malarstwo", glowna: false },
